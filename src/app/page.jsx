@@ -88,7 +88,7 @@ export default function WeddingInvitation() {
 
         <div className="relative w-full z-10 flex-col items-center justify-center">
           <div className='w-full flex justify-center my-2'>
-            <img src="/gunungan-wayang.png" alt="" className='w-1/4' />
+            <img src="/gunungan-wayang.png" alt="" className='md:w-1/6 w-1/4' />
           </div>
           <p className="tracking-[0.4em] uppercase text-sm mb-4 text-neutral-300">
             Wedding Invitation
