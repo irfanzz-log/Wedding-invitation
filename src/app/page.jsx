@@ -130,7 +130,7 @@ export default function WeddingInvitation() {
           </p>
 
           <p className='text-serif text-sm  text-neutral-200 text-xs md:text-lg'>Kepada Yth. Bapak/Ibu/Saudara/i</p>
-          <p className='font-jawa text-[#B18B41] md:text-5xl text-4xl my-3'>M Irfansyah</p>
+          <p className='font-jawa text-[#B18B41] md:text-5xl text-4xl my-3'>Satria F Design</p>
           <div className='w-full flex justify-center items-center'>
             <button
               type='button'
@@ -576,7 +576,7 @@ export default function WeddingInvitation() {
         {/* FOOTER */}
         <footer className="py-10 text-center bg-black border-t border-neutral-900">
           <p className="text-neutral-500">
-            © 2026 Solusi Digital Kreatif
+            © 2026 Satria F Design
           </p>
         </footer>
       </div>
