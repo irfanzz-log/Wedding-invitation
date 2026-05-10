@@ -103,7 +103,7 @@ export default function WeddingInvitation() {
 
   return (
     <main className={`relative text-white h-screen w-full overflow-x-hidden ${isOpen ? 'overflow-y-scroll' : 'overflow-y-hidden'}`}>
-      <div className="fixed -z-1 inset-0 bg-[url(/bg.png)] bg-cover bg-center bg-no-repeat opacity-10 h-screen w-full" />
+      <div className="fixed -z-1 inset-0 bg-[url(/bg.png)] bg-cover bg-no-repeat opacity-10 h-screen w-full" />
 
       <motion.section
         initial={{ opacity: 0, y: 100 }}
