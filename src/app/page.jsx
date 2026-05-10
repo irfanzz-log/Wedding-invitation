@@ -1,0 +1,555 @@
+'use client';
+
+import { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { audio } from 'framer-motion/client';
+
+export default function WeddingInvitation() {
+  const targetDate = new Date('2026-06-25T11:00:00').getTime();
+  const audioRef = useRef(null);
+  
+  function playAudio(){
+    if(!audioRef.current) {
+      audioRef.current = new window.Audio('/music/music.mp3');
+      audioRef.current.loop = true;
+    }
+
+    audioRef.current.play();
+  }
+
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((distance / (1000 * 60)) % 60),
+        seconds: Math.floor((distance / 1000) % 60),
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const [ucapan, setUcapan] = useState([]);
+  const [isOpen,setIsOpen] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    message: "",
+    status: ""
+  });
+
+  function formUpdate(e) {
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  const [isWarning, setIsWarning] = useState();
+
+  function handleFormButton(e) {
+    e.preventDefault();
+
+    setIsWarning(false);
+    if (!form.name || !form.message || !form.status) { setIsWarning(true) }
+    else {
+      setUcapan((prev) => [...prev, form]);
+
+      setForm({
+        name: "",
+        message: "",
+        status: ""
+      })
+      setIsWarning(false);
+    }
+  }
+
+  return (
+    <main className={`relative text-white h-screen w-full overflow-x-hidden ${isOpen ? 'overflow-y-scroll' : 'overflow-y-hidden'}`}>
+      <div className="fixed -z-1 inset-0 bg-[url(/bg.png)] bg-cover bg-center bg-no-repeat opacity-10 h-screen w-full" />
+
+      <motion.section
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        className={`relative h-screen items-center justify-center text-center px-6 transition-all duration-1000 ease-out ${isOpen ? 'hidden opacity-0' : 'opacity-100 flex'}`}>
+        <div className="absolute inset-0 bg-[url('/g2.jpeg')] bg-cover bg-center brightness-50" />
+
+        <div className="relative w-full z-10 flex-col items-center justify-center">
+          <div className='w-full flex justify-center my-2'>
+            <img src="/gunungan-wayang.png" alt="" className='w-1/4' />
+          </div>
+          <p className="tracking-[0.4em] uppercase text-sm mb-4 text-neutral-300">
+            Wedding Invitation
+          </p>
+
+          <h1 className="text-6xl md:text-8xl font-serif mb-6 text-[#B18B41]">
+            Noval <span className="">&</span> Girl
+          </h1>
+
+          <p className="text-lg text-neutral-200 mb-8">
+            Sunday, 06 Juni 2026
+          </p>
+
+          <p className='text-serif text-sm  text-neutral-200 text-xs md:text-lg'>Kepada Yth. Bapak/Ibu/Saudara/i</p>
+          <p className='font-jawa text-[#B18B41] md:text-5xl text-4xl my-3'>M Irfansyah</p>
+          <div className='w-full flex justify-center items-center'>
+            <button
+            type='button' 
+            onClick={()=> { setIsOpen(!isOpen); playAudio();}}
+            className='hover:scale-110 my-2 flex items-center p-2 rounded-lg bg-[#B18B41] text-white font-serif'><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-envelope-open" viewBox="0 0 16 16">
+            <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.817l5.75 3.45L8 8.917l1.25.75L15 6.217V5.4a1 1 0 0 0-.53-.882zM15 7.383l-4.778 2.867L15 13.117zm-.035 6.88L8 10.082l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738ZM1 13.116l4.778-2.867L1 7.383v5.734ZM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765z" />
+          </svg></span><span className='mx-2'>Buka Undangan</span></button>
+          </div>
+        </div>
+
+      </motion.section>
+
+      <div className=''>
+        {/* HERO */}
+        <div
+          className={`relative h-screen flex items-center justify-center text-center px-6 transition-all duration-1000 ease-out ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="absolute inset-0 bg-[url('/hero.jpeg')] bg-cover bg-center brightness-50" />
+
+          <div className="relative z-10">
+            <div className='w-full flex justify-center my-2'>
+              <img src="/gunungan-wayang.png" alt="" className='w-1/4' />
+            </div>
+            <p className="tracking-[0.4em] uppercase text-sm mb-4 text-neutral-300">
+              Wedding Invitation
+            </p>
+
+            <h1 className="text-6xl md:text-8xl font-serif mb-6 text-[#B18B41]">
+              Noval <span className="">&</span> Girl
+            </h1>
+
+            <p className="text-lg text-neutral-200 mb-8">
+              Sunday, 06 Juni 2026
+            </p>
+
+            <p className='text-serif text-sm  text-neutral-200'>Tanpa Mengurangi Rasa Hormat,
+              Kami Mengundang Bapak/Ibu/Saudara/i
+              Untuk Hadir Di Acara Pernikahan Kami.</p>
+          </div>
+        </div>
+
+        {/* QUOTE */}
+        <motion.section
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="py-28 px-6 bg-neutral-950/20 text-center">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-3xl md:text-5xl leading-relaxed font-serif text-[#B18B41]">
+              “Two souls with but a single thought, two hearts that beat as one.”
+            </p>
+          </div>
+        </motion.section>
+
+        {/* COUPLE */}
+        <motion.section
+          id="detail"
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="py-28 px-6 "
+        >
+          <div className='relative w-full flex flex-col items-center justify-center my-10 mb-20'>
+            <div className='absolute -z-1 w-full flex justify-center my-2 opacity-40'>
+              <img src="/gunungan-wayang.png" alt="" className='md:w-1/6 w-1/2' />
+            </div>
+            <div className='text-center'>
+              <h2 className='text-[#505050] text-xl font-serif my-3'>Pasangan</h2>
+              <p className='font-jawa text-[#B18B41] text-4xl'>Pengantin</p>
+            </div>
+            <div className='my-5'>
+              <p className='text-[#505050] font-serif text-xs text-center'>Maha Suci Allah SWT, Yang telah menciptakan makhlukNya berpasang-pasangan.
+                Ya Allah, perkenankanlah dan Ridhoilah Pernikahan kami.</p>
+            </div>
+          </div>
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
+            {/* Groom */}
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+              className="text-center">
+              <div className="w-56 h-56 mx-auto rounded-full overflow-hidden mb-8 border-4 border-[#B18B41]">
+                <img
+                  src="/noval.png"
+                  alt="Groom"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <h2 className="text-4xl font-jawa text-[#B18B41] mb-3">Noval Bintang Ramadhan</h2>
+              <div className='w-full flex justify-center'>
+                <div className='w-3/4 p-[0.2px] rounded-xl my-2 bg-black'>
+                </div>
+              </div>
+              <p className='text-[#505050] font-serif'>Putra Pertama</p>
+              <p className="text-[#505050] font-serif">
+                Son of .......
+              </p>
+            </motion.div>
+
+            {/* Bride */}
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+              className="text-center">
+              <div className="w-56 h-56 mx-auto rounded-full overflow-hidden mb-8 border-4 border-[#B18B41]">
+                <img
+                  src="/girl.png"
+                  alt="Bride"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <h2 className="text-4xl font-jawa text-[#B18B41] mb-3">Mempelai Wanita</h2>
+              <div className='w-full flex justify-center'>
+                <div className='w-3/4 p-[0.2px] rounded-xl my-2 bg-black'>
+                </div>
+              </div>
+              <p className='text-[#505050] font-serif'>Putri Pertama</p>
+              <p className="text-[#505050] font-serif">
+                Daughter of Mr. M......
+              </p>
+            </motion.div>
+          </div>
+        </motion.section>
+
+        {/* COUNTDOWN */}
+        <motion.section
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="relative py-28 px-6 bg-[url(/countdown.jpeg)] bg-center bg-cover text-center">
+          <div className='absolute w-full h-full bg-black/40 z-10 top-0 left-0 inset-0'></div>
+          <div className='relative z-20 mb-10'>
+            <h2 className=" font-serif mb-5 text-neutral-100 text-xl">Hitung Mundur</h2>
+            <p className='font-jawa text-[#B18B41] font-bold text-5xl'>Menuju Hari Bahagia</p>
+          </div>
+
+          <div className="relative grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto z-20">
+            {[
+              { label: 'Days', value: timeLeft.days },
+              { label: 'Hours', value: timeLeft.hours },
+              { label: 'Minutes', value: timeLeft.minutes },
+              { label: 'Seconds', value: timeLeft.seconds },
+            ].map((item) => (
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+                key={item.label}
+                className="rounded-3xl p-10 border border-neutral-100 backdrop-blur-[1px]"
+              >
+                <h3 className="text-5xl font-bold text-[#B18B41] mb-2">
+                  {item.value}
+                </h3>
+
+                <p className="text-neutral-100 uppercase tracking-widest text-sm">
+                  {item.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* EVENT */}
+        <motion.section
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="py-28 px-6 bg-neutral-950">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className='w-full mb-10'>
+              <h2 className="font-serif text-xl my-2 text-neutral-100">Waktu & Tempat</h2>
+              <p className='font-jawa text-[#B18B41] text-4xl'>Pernikahan</p>
+              <p className='font-serif text-neutral-100 text-sm'>Pertemuan adalah permulaan, tetap bersama adalah perkembangan, bekerja sama adalah keberhasilan.</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+                className="bg-black rounded-3xl p-10 border border-[#B18B41]">
+                <div className='w-full flex justify-center my-3'>
+                  <img src="/dovewhite.png" alt="" className='w-1/2' />
+                </div>
+                <h3 className="text-3xl mb-6 text-[#B18B41] font-jawa">
+                  Akad Nikah
+                </h3>
+
+                <p className="text-neutral-200 font-serif leading-8">
+                  Sunday
+                  <br /> <span className='text-5xl font-bold text-[#B18B41]'>06</span>
+                  <br /> <span className='text-[#B18B41]'>Juni 2026</span>
+                  <br />
+                  11.00 WIB - 12.00 WIB
+                  <br />
+                  Grand Ballroom Jakarta
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+                className="bg-black rounded-3xl p-10 border border-[#B18B41] ">
+                <div className='w-full flex justify-center my-3'>
+                  <img src="/bouquetwhite.png" alt="" className='w-1/2' />
+                </div>
+                <h3 className="text-3xl mb-6 text-[#B18B41] font-jawa">
+                  Reception
+                </h3>
+
+                <p className="text-neutral-200 font-serif leading-8">
+                  Sunday
+                  <br /> <span className='text-5xl font-bold text-[#B18B41]'>06</span>
+                  <br /> <span className='text-[#B18B41]'>Juni 2026</span>
+                  <br />
+                  12.00 WIB s/d Selesai
+                  <br />
+                  Grand Ballroom Jakarta
+                </p>
+              </motion.div>
+            </div>
+
+            <div className='w-full my-10'>
+              <div className='w-full mb-10'>
+                <h2 className="font-serif text-xl my-2 text-neutral-100">Lokasi</h2>
+                <p className='font-jawa text-[#B18B41] text-4xl'>GH Universal Hotel</p>
+                <p className='font-serif text-neutral-100 text-sm'>Jl. Dr. Setiabudi No.376, Ledeng, Kec. Cidadap, Kota Bandung, Jawa Barat</p>
+              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+                className='w-full'>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3686.5056011888314!2d106.56274711876867!3d-6.257948267590176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1778396282397!5m2!1sid!2sid"
+                  className='w-full h-100'
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade">
+                </iframe>
+              </motion.div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Story */}
+        <motion.section className="relative py-28 px-6 bg-center bg-cover text-center">
+          <div className='absolute w-full h-full bg-black/70 z-10 top-0 left-0 inset-0'></div>
+          <div className='relative z-20 mb-10'>
+            <h2 className=" font-serif mb-5 text-neutral-100 text-xl">Sebuah Kisah</h2>
+            <p className='font-jawa text-[#B18B41] font-bold text-5xl'>Perjalanan Kami</p>
+            <p className='font-serif text-neutral-100 text-sm mt-5'>Perjalanan yang tak terlupakan, dan perjalanan yang mengubah tujuan hidup kami</p>
+          </div>
+
+          <div className="relative z-20">
+            <div className='w-full md:flex-row flex-col'>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+                className='my-5'>
+                <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Awal Bertemu</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+                className='my-5'>
+                <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Lamaran</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                viewport={{ once: true }}
+                className='my-5'>
+                <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Menikah</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
+              </motion.div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* GALLERY */}
+        <motion.section
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="py-28 px-2">
+          <div className="max-w-6xl mx-auto">
+            <div className='w-full mb-20 text-center'>
+              <h2 className="font-serif text-xl my-2 text-[#505050]">Moment</h2>
+              <p className='font-jawa text-[#B18B41] text-4xl'>Bahagia Kami</p>
+              <p className='font-serif text-[#505050] text-sm mt-5'>Pertemuan adalah permulaan, tetap bersama adalah perkembangan, bekerja sama adalah keberhasilan.</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 grid-cols-2 gap-1">
+              {['hero.jpeg', 'g1.jpeg', 'g2.jpeg', 'g3.jpeg', 'g4.jpeg', 'g5.jpeg'].map((img) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 100 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1 }}
+                  viewport={{ once: true }}
+                  key={img}
+                  className="overflow-hidden w-full rounded-lg"
+                >
+                  <img
+                    src={`/${img}`}
+                    alt="Gallery"
+                    className="w-full h-full object-cover hover:scale-110 transition duration-700"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Gift */}
+        <motion.section
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="relative py-28 px-6 bg-center bg-cover text-center">
+          <div className='absolute w-full h-full bg-black/70 z-10 top-0 left-0 inset-0'></div>
+          <div className='relative z-20 mb-10'>
+            <p className='font-jawa text-[#B18B41] font-bold text-5xl'>Amplop Digital</p>
+            <p className='font-serif text-neutral-100 text-sm mt-5'>Doa restu Anda merupakan hadiah terindah bagi kami. Namun apabila memberi adalah bentuk kasih, Anda dapat mengirimkan tanda kasih melalui amplop digital berikut.</p>
+          </div>
+
+          <div className="relative z-20">
+            <div className='w-full md:flex-row flex-col'>
+              <div className='relative my-5 text-[#505050] bg-white p-5 rounded-xl'>
+                <div className='w-full flex justify-center my-2'>
+                  <img src="/bca.svg" alt="" className='md:w-1/6 w-3/4' />
+                </div>
+                <p className='text-lg'>7111804391</p>
+                <p className='text-sm'>A/N M Irfansyah</p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* RSVP */}
+        <motion.section
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="py-28 px-6 bg-neutral-950">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className='relative z-20 mb-10'>
+              <h2 className="font-serif text-xl my-2 text-neutral-100">Doa & Ucapan</h2>
+              <p className='font-jawa text-[#B18B41] text-4xl'>Untuk Kami Berdua</p>
+              <p className='font-serif text-neutral-100 text-sm'>Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/ Ibu/ Saudara/ i berkenan hadir, untuk memberikan do'a restu kepada kami.</p>
+            </div>
+
+            <div className="relative flex justify-center">
+              <form onSubmit={handleFormButton} className='flex w-full flex-col font-serif text-[#505050]'>
+                <input name='name' type="text" placeholder='Nama' className='w-full bg-white p-2 rounded-md my-1' value={form?.name} onChange={formUpdate} />
+                <textarea name="message" id="" placeholder='Beri ucapan' className='text- w-full bg-white p-2 rounded-md my-1 resize-none' value={form?.message} onChange={formUpdate}></textarea>
+                <div className='relative w-full my-1'>
+                  <div name="status" className='p-2 bg-white rounded-md p-2 hover:bg-gray-100 cursor-pointer' value={form?.status} onClick={(() => setIsActive(!isActive))}>{form.status || 'Status Kehadiran'}</div>
+                  <div className={`z-2 shadow-md absolute flex-col bg-white w-full -bottom-22 rounded-md left-0 ${isActive ? 'flex' : 'hidden'}`}>
+                    <button type='button' className='w-full p-2 hover:bg-gray-100 cursor-pointer' onClick={() => {
+                      setForm((prev) => ({
+                        ...prev,
+                        status: 'Hadir',
+                      }));
+
+                      setIsActive(false);
+                    }}>Hadir</button>
+                    <button type='button' className='w-full p-2 hover:bg-gray-100 cursor-pointer' onClick={() => {
+                      setForm((prev) => ({
+                        ...prev,
+                        status: 'Tidak Hadir',
+                      }));
+
+                      setIsActive(false);
+                    }}>Tidak Hadir</button>
+                  </div>
+                </div>
+                {isWarning && <p className='text-red-700'>Harap Lengkapi form!</p>}
+                <button className='w-1/2 bg-[#B18B41] text-white p-2 rounded-md my-1'>Kirim Ucapan</button>
+              </form>
+            </div>
+
+            <div className='relative w-full my-1'>
+              <div className='w-full flex flex-col bg-white rounded-md overflow-hidden'>
+                <div className='text-left font-serif p-2 w-full bg-[#B18B41]'>
+                  <p>Coments</p>
+                </div>
+                {ucapan.map((data, idx) => {
+                  return (
+                    <div key={idx} className='w-full flex text-left text-black p-2 my-2'>
+                      <div className='w-1/5 md:w-1/8'>
+                        <div className='w-15 h-15 rounded-full overflow-hidden'>
+                          <img src="/noval.png" className='w-full h-full bg-center object-cover' alt="" />
+                        </div>
+                      </div>
+                      <div className='w-full p-2'>
+                        <div className='w-full flex items-center'>
+                          <p className='font-bold'>{data.name}</p>
+                          <p className='mx-3 p-1 px-2 text-xs text-white bg-[#B18B41] rounded-lg'>{data.status}</p>
+                        </div>
+                        <div>
+                          <p className='text-sm'>{data.message}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* FOOTER */}
+        <footer className="py-10 text-center bg-black border-t border-neutral-900">
+          <p className="text-neutral-500">
+            © 2026 Solusi Digital Kreatif
+          </p>
+        </footer>
+      </div>
+    </main>
+  );
+}
