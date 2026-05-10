@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { supabase } from '@/lib/supabase';
 
 export default function WeddingInvitation() {
   const targetDate = new Date('2026-06-25T11:00:00').getTime();
@@ -39,6 +40,23 @@ export default function WeddingInvitation() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+
+  async function getComments() {
+
+    const { data, error } = await supabase
+      .from('comments')
+      .select('*');
+
+    if (!error) {
+      setUcapan(data);
+    }
+  }
+
+  getComments();
+
+}, []);
+
   const [ucapan, setUcapan] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -57,22 +75,31 @@ export default function WeddingInvitation() {
 
   const [isWarning, setIsWarning] = useState();
 
-  function handleFormButton(e) {
-    e.preventDefault();
+  async function handleFormButton(e) {
+  e.preventDefault();
 
-    setIsWarning(false);
-    if (!form.name || !form.message || !form.status) { setIsWarning(true) }
-    else {
-      setUcapan((prev) => [...prev, form]);
+  setIsWarning(false);
 
-      setForm({
-        name: "",
-        message: "",
-        status: ""
-      })
-      setIsWarning(false);
-    }
+  if (!form.name || !form.message || !form.status) {
+    return setIsWarning(true);
   }
+
+  const { data, error } = await supabase
+    .from('comments')
+    .insert([form])
+    .select();
+
+  if (!error) {
+
+    setUcapan((prev) => [...prev, data[0]]);
+
+    setForm({
+      name: "",
+      message: "",
+      status: ""
+    });
+  }
+}
 
   return (
     <main className={`relative text-white h-screen w-full overflow-x-hidden ${isOpen ? 'overflow-y-scroll' : 'overflow-y-hidden'}`}>
