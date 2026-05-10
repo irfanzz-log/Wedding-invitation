@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { audio } from 'framer-motion/client';
 
 export default function WeddingInvitation() {
   const targetDate = new Date('2026-06-25T11:00:00').getTime();
