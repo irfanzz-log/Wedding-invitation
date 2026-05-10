@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 export default function WeddingInvitation() {
   const targetDate = new Date('2026-06-25T11:00:00').getTime();
   const audioRef = useRef(null);
-  
-  function playAudio(){
-    if(!audioRef.current) {
+
+  function playAudio() {
+    if (!audioRef.current) {
       audioRef.current = new window.Audio('/music/music.mp3');
       audioRef.current.loop = true;
     }
@@ -40,7 +40,7 @@ export default function WeddingInvitation() {
   }, []);
 
   const [ucapan, setUcapan] = useState([]);
-  const [isOpen,setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -106,11 +106,11 @@ export default function WeddingInvitation() {
           <p className='font-jawa text-[#B18B41] md:text-5xl text-4xl my-3'>M Irfansyah</p>
           <div className='w-full flex justify-center items-center'>
             <button
-            type='button' 
-            onClick={()=> { setIsOpen(!isOpen); playAudio();}}
-            className='hover:scale-110 my-2 flex items-center p-2 rounded-lg bg-[#B18B41] text-white font-serif'><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-envelope-open" viewBox="0 0 16 16">
-            <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.817l5.75 3.45L8 8.917l1.25.75L15 6.217V5.4a1 1 0 0 0-.53-.882zM15 7.383l-4.778 2.867L15 13.117zm-.035 6.88L8 10.082l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738ZM1 13.116l4.778-2.867L1 7.383v5.734ZM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765z" />
-          </svg></span><span className='mx-2'>Buka Undangan</span></button>
+              type='button'
+              onClick={() => { setIsOpen(!isOpen); playAudio(); }}
+              className='hover:scale-110 my-2 flex items-center p-2 rounded-lg bg-[#B18B41] text-white font-serif'><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-envelope-open" viewBox="0 0 16 16">
+                <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.817l5.75 3.45L8 8.917l1.25.75L15 6.217V5.4a1 1 0 0 0-.53-.882zM15 7.383l-4.778 2.867L15 13.117zm-.035 6.88L8 10.082l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738ZM1 13.116l4.778-2.867L1 7.383v5.734ZM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765z" />
+              </svg></span><span className='mx-2'>Buka Undangan</span></button>
           </div>
         </div>
 
@@ -175,8 +175,8 @@ export default function WeddingInvitation() {
               <h2 className='text-[#505050] text-xl font-serif my-3'>Pasangan</h2>
               <p className='font-jawa text-[#B18B41] text-4xl'>Pengantin</p>
             </div>
-            <div className='my-5'>
-              <p className='text-[#505050] font-serif text-xs text-center'>Maha Suci Allah SWT, Yang telah menciptakan makhlukNya berpasang-pasangan.
+            <div className='my-5 w-full md:flex justify-center'>
+              <p className='text-[#505050] font-serif text-xs text-center md:text-xl md:w-1/3'>Maha Suci Allah SWT, Yang telah menciptakan makhlukNya berpasang-pasangan.
                 Ya Allah, perkenankanlah dan Ridhoilah Pernikahan kami.</p>
             </div>
           </div>
@@ -286,7 +286,7 @@ export default function WeddingInvitation() {
             <div className='w-full mb-10'>
               <h2 className="font-serif text-xl my-2 text-neutral-100">Waktu & Tempat</h2>
               <p className='font-jawa text-[#B18B41] text-4xl'>Pernikahan</p>
-              <p className='font-serif text-neutral-100 text-sm'>Pertemuan adalah permulaan, tetap bersama adalah perkembangan, bekerja sama adalah keberhasilan.</p>
+              <p className='font-serif text-neutral-100 md:text-lg text-sm'>Pertemuan adalah permulaan, tetap bersama adalah perkembangan, bekerja sama adalah keberhasilan.</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -321,7 +321,7 @@ export default function WeddingInvitation() {
                 viewport={{ once: true }}
                 className="bg-black rounded-3xl p-10 border border-[#B18B41] ">
                 <div className='w-full flex justify-center my-3'>
-                  <img src="/bouquetwhite.png" alt="" className='w-1/2' />
+                  <img src="/bouquetwhite.png" alt="" className='w-1/3' />
                 </div>
                 <h3 className="text-3xl mb-6 text-[#B18B41] font-jawa">
                   Reception
@@ -369,7 +369,7 @@ export default function WeddingInvitation() {
           <div className='relative z-20 mb-10'>
             <h2 className=" font-serif mb-5 text-neutral-100 text-xl">Sebuah Kisah</h2>
             <p className='font-jawa text-[#B18B41] font-bold text-5xl'>Perjalanan Kami</p>
-            <p className='font-serif text-neutral-100 text-sm mt-5'>Perjalanan yang tak terlupakan, dan perjalanan yang mengubah tujuan hidup kami</p>
+            <p className='font-serif text-neutral-100 md:text-lg text-sm mt-5'>Perjalanan yang tak terlupakan, dan perjalanan yang mengubah tujuan hidup kami</p>
           </div>
 
           <div className="relative z-20">
@@ -379,9 +379,11 @@ export default function WeddingInvitation() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 viewport={{ once: true }}
-                className='my-5'>
-                <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Awal Bertemu</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
+                className='my-5 w-full md:flex justify-center'>
+                <div className='md:w-1/4'>
+                  <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Awal Bertemu</h2>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
+                </div>
               </motion.div>
 
               <motion.div
@@ -389,20 +391,22 @@ export default function WeddingInvitation() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 viewport={{ once: true }}
-                className='my-5'>
-                <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Lamaran</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
-              </motion.div>
+                className='my-5 w-full md:flex justify-center'>
+                <div className='md:w-1/4'>
+                  <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Lamaran</h2>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
+                </div> </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 viewport={{ once: true }}
-                className='my-5'>
-                <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Menikah</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
-              </motion.div>
+                className='my-5 w-full md:flex justify-center'>
+                <div className='md:w-1/4'>
+                  <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Menikah</h2>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
+                </div></motion.div>
             </div>
           </div>
         </motion.section>
@@ -418,7 +422,7 @@ export default function WeddingInvitation() {
             <div className='w-full mb-20 text-center'>
               <h2 className="font-serif text-xl my-2 text-[#505050]">Moment</h2>
               <p className='font-jawa text-[#B18B41] text-4xl'>Bahagia Kami</p>
-              <p className='font-serif text-[#505050] text-sm mt-5'>Pertemuan adalah permulaan, tetap bersama adalah perkembangan, bekerja sama adalah keberhasilan.</p>
+              <p className='font-serif text-[#505050] md:text-lg text-sm mt-5'>Pertemuan adalah permulaan, tetap bersama adalah perkembangan, bekerja sama adalah keberhasilan.</p>
             </div>
 
             <div className="grid md:grid-cols-3 grid-cols-2 gap-1">
@@ -452,7 +456,7 @@ export default function WeddingInvitation() {
           <div className='absolute w-full h-full bg-black/70 z-10 top-0 left-0 inset-0'></div>
           <div className='relative z-20 mb-10'>
             <p className='font-jawa text-[#B18B41] font-bold text-5xl'>Amplop Digital</p>
-            <p className='font-serif text-neutral-100 text-sm mt-5'>Doa restu Anda merupakan hadiah terindah bagi kami. Namun apabila memberi adalah bentuk kasih, Anda dapat mengirimkan tanda kasih melalui amplop digital berikut.</p>
+            <p className='font-serif text-neutral-100 md:text-lg text-sm mt-5'>Doa restu Anda merupakan hadiah terindah bagi kami. Namun apabila memberi adalah bentuk kasih, Anda dapat mengirimkan tanda kasih melalui amplop digital berikut.</p>
           </div>
 
           <div className="relative z-20">
@@ -479,7 +483,7 @@ export default function WeddingInvitation() {
             <div className='relative z-20 mb-10'>
               <h2 className="font-serif text-xl my-2 text-neutral-100">Doa & Ucapan</h2>
               <p className='font-jawa text-[#B18B41] text-4xl'>Untuk Kami Berdua</p>
-              <p className='font-serif text-neutral-100 text-sm'>Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/ Ibu/ Saudara/ i berkenan hadir, untuk memberikan do'a restu kepada kami.</p>
+              <p className='font-serif text-neutral-100 md:text-lg text-sm'>Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/ Ibu/ Saudara/ i berkenan hadir, untuk memberikan do'a restu kepada kami.</p>
             </div>
 
             <div className="relative flex justify-center">
@@ -508,7 +512,7 @@ export default function WeddingInvitation() {
                   </div>
                 </div>
                 {isWarning && <p className='text-red-700'>Harap Lengkapi form!</p>}
-                <button className='w-1/2 bg-[#B18B41] text-white p-2 rounded-md my-1'>Kirim Ucapan</button>
+                <button className='hover:scale-110 transition-all duration-400 ease-out w-1/2 bg-[#B18B41] text-white p-2 rounded-md my-1'>Kirim Ucapan</button>
               </form>
             </div>
 
