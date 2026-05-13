@@ -38,7 +38,7 @@ export const metadata = {
 
     images: [
       {
-        url: "https://wedding.solusidigitalkreatif.my.id/thumbnail.jpg",
+        url: "https://wedding.solusidigitalkreatif.my.id/thumbnail.jpeg",
         width: 1200,
         height: 630,
         alt: "Noval & Latifah Wedding",
@@ -55,7 +55,7 @@ export const metadata = {
     description:
       "Undangan pernikahan Noval & Latifah.",
     images: [
-      "https://wedding.solusidigitalkreatif.my.id/thumbnail.jpg",
+      "https://wedding.solusidigitalkreatif.my.id/thumbnail.jpeg",
     ],
   },
 };
