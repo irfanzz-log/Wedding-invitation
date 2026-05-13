@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 import Tamu from '@/component/tamu';
 
 export default function WeddingInvitation() {
-  const targetDate = new Date('2026-06-25T11:00:00').getTime();
+  const targetDate = new Date('2026-06-06T11:00:00').getTime();
   const audioRef = useRef(null);
 
   function playAudio() {
@@ -498,8 +498,16 @@ export default function WeddingInvitation() {
                 <div className='w-full flex justify-center my-2'>
                   <img src="/bca.svg" alt="" className='md:w-1/6 w-3/4' />
                 </div>
-                <p className='text-lg'>7111804391</p>
-                <p className='text-sm'>A/N M Irfansyah</p>
+                <p className='text-lg'>8880466420</p>
+                <p className='text-sm'>A/N M Noval Bintang Ramadhan</p>
+              </div>
+
+              <div className='relative my-5 text-[#505050] bg-white p-5 rounded-xl'>
+                <div className='w-full flex justify-center my-2'>
+                  <img src="/seabank.png" alt="" className='md:w-1/6 w-3/4' />
+                </div>
+                <p className='text-lg'>901116980578 </p>
+                <p className='text-sm'>A/N M Latifah Alawiyah</p>
               </div>
             </div>
           </div>

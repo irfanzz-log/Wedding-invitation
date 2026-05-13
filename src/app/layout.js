@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local';
 import "./globals.css";
+import { title } from "framer-motion/client";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,6 +23,18 @@ export const metadata = {
   description: "Undangan pernikahan Noval & Latifah. Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di hari istimewa kami.",
   icons: {
     icon: '/favicon.ico'
+  },
+
+  openGraph: {
+    title: "Noval & Latifah Wedding Innovation",
+    description: "Undangan pernikahan Noval & Latifah. Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di hari istimewa kami.",
+    images: [
+      {
+        url: "/hero.jpeg",
+        width: 2773,
+        heigh: 4160
+      }
+    ]
   }
 };
 
