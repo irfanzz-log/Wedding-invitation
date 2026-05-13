@@ -3,16 +3,12 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
-import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import Tamu from '@/component/tamu';
 
 export default function WeddingInvitation() {
-  const searchParams = useSearchParams();
   const targetDate = new Date('2026-06-25T11:00:00').getTime();
   const audioRef = useRef(null);
-
-  const tamu = searchParams.get('tamu');
-  
-  
 
   function playAudio() {
     if (!audioRef.current) {
@@ -136,7 +132,9 @@ export default function WeddingInvitation() {
           </p>
 
           <p className='text-serif text-sm  text-neutral-200 text-xs md:text-lg'>Kepada Yth. Bapak/Ibu/Saudara/i</p>
-          <p className='font-jawa text-[#B18B41] md:text-5xl text-4xl my-3'>{tamu || "Tamu Undangan"}</p>
+          <Suspense fallback={<div className='font-jawa text-[#B18B41] md:text-5xl text-4xl my-3'>Loading...</div>}>
+            <Tamu />
+          </Suspense>
           <div className='w-full flex justify-center items-center'>
             <button
               type='button'
