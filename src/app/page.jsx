@@ -124,7 +124,7 @@ export default function WeddingInvitation() {
           </p>
 
           <h1 className="text-6xl md:text-8xl font-serif mb-6 text-[#B18B41]">
-            Noval <span className="">&</span> Latifah alawiah
+            Noval <span className="">&</span> Latifah
           </h1>
 
           <p className="text-lg text-neutral-200 mb-8">
