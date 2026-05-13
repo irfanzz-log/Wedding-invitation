@@ -3,10 +3,16 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
+import { useSearchParams } from 'next/navigation';
 
 export default function WeddingInvitation() {
+  const searchParams = useSearchParams();
   const targetDate = new Date('2026-06-25T11:00:00').getTime();
   const audioRef = useRef(null);
+
+  const tamu = searchParams.get('tamu');
+  
+  
 
   function playAudio() {
     if (!audioRef.current) {
@@ -42,20 +48,20 @@ export default function WeddingInvitation() {
 
   useEffect(() => {
 
-  async function getComments() {
+    async function getComments() {
 
-    const { data, error } = await supabase
-      .from('comments')
-      .select('*');
+      const { data, error } = await supabase
+        .from('comments')
+        .select('*');
 
-    if (!error) {
-      setUcapan(data);
+      if (!error) {
+        setUcapan(data);
+      }
     }
-  }
 
-  getComments();
+    getComments();
 
-}, []);
+  }, []);
 
   const [ucapan, setUcapan] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -76,30 +82,30 @@ export default function WeddingInvitation() {
   const [isWarning, setIsWarning] = useState();
 
   async function handleFormButton(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  setIsWarning(false);
+    setIsWarning(false);
 
-  if (!form.name || !form.message || !form.status) {
-    return setIsWarning(true);
+    if (!form.name || !form.message || !form.status) {
+      return setIsWarning(true);
+    }
+
+    const { data, error } = await supabase
+      .from('comments')
+      .insert([form])
+      .select();
+
+    if (!error) {
+
+      setUcapan((prev) => [...prev, data[0]]);
+
+      setForm({
+        name: "",
+        message: "",
+        status: ""
+      });
+    }
   }
-
-  const { data, error } = await supabase
-    .from('comments')
-    .insert([form])
-    .select();
-
-  if (!error) {
-
-    setUcapan((prev) => [...prev, data[0]]);
-
-    setForm({
-      name: "",
-      message: "",
-      status: ""
-    });
-  }
-}
 
   return (
     <main className={`relative text-white h-screen w-full overflow-x-hidden ${isOpen ? 'overflow-y-scroll' : 'overflow-y-hidden'}`}>
@@ -122,15 +128,15 @@ export default function WeddingInvitation() {
           </p>
 
           <h1 className="text-6xl md:text-8xl font-serif mb-6 text-[#B18B41]">
-            Noval <span className="">&</span> Girl
+            Noval <span className="">&</span> Latifah alawiah
           </h1>
 
           <p className="text-lg text-neutral-200 mb-8">
-            Sunday, 06 Juni 2026
+            Saturday, 06 Juni 2026
           </p>
 
           <p className='text-serif text-sm  text-neutral-200 text-xs md:text-lg'>Kepada Yth. Bapak/Ibu/Saudara/i</p>
-          <p className='font-jawa text-[#B18B41] md:text-5xl text-4xl my-3'>Satria F Design</p>
+          <p className='font-jawa text-[#B18B41] md:text-5xl text-4xl my-3'>{tamu || "Tamu Undangan"}</p>
           <div className='w-full flex justify-center items-center'>
             <button
               type='button'
@@ -158,11 +164,11 @@ export default function WeddingInvitation() {
             </p>
 
             <h1 className="text-6xl md:text-8xl font-serif mb-6 text-[#B18B41]">
-              Noval <span className="">&</span> Girl
+              Noval <span className="">&</span> Latifah
             </h1>
 
             <p className="text-lg text-neutral-200 mb-8">
-              Sunday, 06 Juni 2026
+              Saturday, 06 Juni 2026
             </p>
 
             <p className='text-serif text-sm  text-neutral-200'>Tanpa Mengurangi Rasa Hormat,
@@ -228,9 +234,9 @@ export default function WeddingInvitation() {
                 <div className='w-3/4 p-[0.2px] rounded-xl my-2 bg-black'>
                 </div>
               </div>
-              <p className='text-[#505050] font-serif'>Putra Pertama</p>
+              <p className='text-[#505050] font-serif'>Anak kedua dari 4 bersaudara</p>
               <p className="text-[#505050] font-serif">
-                Son of .......
+                Bapak Eko Prasetyo dan Ibu Sri Hartini
               </p>
             </motion.div>
 
@@ -249,14 +255,14 @@ export default function WeddingInvitation() {
                 />
               </div>
 
-              <h2 className="text-4xl font-jawa text-[#B18B41] mb-3">Mempelai Wanita</h2>
+              <h2 className="text-4xl font-jawa text-[#B18B41] mb-3">Latifah alawiah</h2>
               <div className='w-full flex justify-center'>
                 <div className='w-3/4 p-[0.2px] rounded-xl my-2 bg-black'>
                 </div>
               </div>
-              <p className='text-[#505050] font-serif'>Putri Pertama</p>
+              <p className='text-[#505050] font-serif'>Anak kedua dari 2 bersaudara</p>
               <p className="text-[#505050] font-serif">
-                Daughter of Mr. M......
+                Bapak Yana Rahman dan Ibu Sri Iimaliah
               </p>
             </motion.div>
           </div>
@@ -331,13 +337,13 @@ export default function WeddingInvitation() {
                 </h3>
 
                 <p className="text-neutral-200 font-serif leading-8">
-                  Sunday
+                  Saturday
                   <br /> <span className='text-5xl font-bold text-[#B18B41]'>06</span>
                   <br /> <span className='text-[#B18B41]'>Juni 2026</span>
                   <br />
                   11.00 WIB - 12.00 WIB
                   <br />
-                  Grand Ballroom Jakarta
+                  Balaraja
                 </p>
               </motion.div>
 
@@ -355,13 +361,13 @@ export default function WeddingInvitation() {
                 </h3>
 
                 <p className="text-neutral-200 font-serif leading-8">
-                  Sunday
+                  Saturday
                   <br /> <span className='text-5xl font-bold text-[#B18B41]'>06</span>
                   <br /> <span className='text-[#B18B41]'>Juni 2026</span>
                   <br />
                   12.00 WIB s/d Selesai
                   <br />
-                  Grand Ballroom Jakarta
+                  Balaraja
                 </p>
               </motion.div>
             </div>
@@ -369,8 +375,8 @@ export default function WeddingInvitation() {
             <div className='w-full my-10'>
               <div className='w-full mb-10'>
                 <h2 className="font-serif text-xl my-2 text-neutral-100">Lokasi</h2>
-                <p className='font-jawa text-[#B18B41] text-4xl'>GH Universal Hotel</p>
-                <p className='font-serif text-neutral-100 text-sm'>Jl. Dr. Setiabudi No.376, Ledeng, Kec. Cidadap, Kota Bandung, Jawa Barat</p>
+                <p className='font-jawa text-[#B18B41] text-4xl my-3'>Balaraja</p>
+                <p className='font-serif text-neutral-100 text-sm'>Saga, Kec. Balaraja, Kabupaten Tangerang, Banten 15610</p>
               </div>
               <motion.div
                 initial={{ opacity: 0, y: 100 }}
@@ -378,8 +384,7 @@ export default function WeddingInvitation() {
                 transition={{ duration: 1 }}
                 viewport={{ once: true }}
                 className='w-full'>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3686.5056011888314!2d106.56274711876867!3d-6.257948267590176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1778396282397!5m2!1sid!2sid"
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3966.618508811874!2d106.45981207499001!3d-6.181785993805685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMTAnNTQuNCJTIDEwNsKwMjcnNDQuNiJF!5e0!3m2!1sid!2sid!4v1778683668162!5m2!1sid!2sid"
                   className='w-full h-100'
                   allowFullScreen=""
                   loading="lazy"
@@ -409,7 +414,8 @@ export default function WeddingInvitation() {
                 className='my-5 w-full md:flex justify-center'>
                 <div className='md:w-1/4'>
                   <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Awal Bertemu</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
+                  <p>Kami pertama kali dipertemukan di sebuah tempat yang sederhana namun indah ruang latihan Bela diri. Di sanalah kami belajar disiplin, persaudaraan, dan kekuatan, sambil perlahan saling mengenal. Dari latihan yang awalnya hanya untuk mengasah ilmu, tumbuhlah rasa yang tidak kami duga. Kini, perjalanan itu membawa kami pada keputusan untuk menyatukan langkah dan membangun masa depan bersama.</p>
+                  <div className='overflow-hidden'><img src="/first-meet.jpeg" alt="" className='my-10 transition-all duration-1000 ease-out hover:scale-110 rounded-lg' /></div>
                 </div>
               </motion.div>
 
@@ -421,8 +427,10 @@ export default function WeddingInvitation() {
                 className='my-5 w-full md:flex justify-center'>
                 <div className='md:w-1/4'>
                   <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Lamaran</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
-                </div> </motion.div>
+                  <p>Hingga pada 30 November 2025, dengan penuh keyakinan dan doa, kami mengikat janji lamaran sebagai langkah awal menuju masa depan yang ingin kami bangun bersama. Dan kini, kami melangkah pada hari yang lebih bahagia, menyatukan cinta yang tumbuh dari pertemuan sederhana menjadi ikatan yang diridhai. </p>
+                  <div className='overflow-hidden'><img src="/lamaran.jpeg" alt="" className='my-10 transition-all duration-1000 ease-out hover:scale-110 rounded-lg' /></div>
+                  <p>"Dan di antara tanda-tanda kekuasaan-Nya diciptakan-Nya untukmu pasangan hidup dari jenismu sendiri supaya kamu dapat ketenangan hati dan dijadikannya kasih sayang di antara kamu. Sesungguhnya yang demikian menjadi tanda-tanda kebesaran-Nya bagi orang-orang yang berpikir." <br /> <span>•⁠  ⁠Q.S. Ar-Rum: 21</span></p>
+                </div></motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 100 }}
@@ -432,7 +440,7 @@ export default function WeddingInvitation() {
                 className='my-5 w-full md:flex justify-center'>
                 <div className='md:w-1/4'>
                   <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Menikah</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur odit at eligendi veniam impedit repellendus maiores alias, in cupiditate tempora quas, magnam labore, error cumque cum harum dolorum dolor.</p>
+                  <p>Dan kini, cinta itu akhirnya berlabuh pada hari yang kami tunggu-tunggu, jatuh pada tanggal 6 Juni 2026 (06-06-2026), sebagai momen suci kami mengikat janji pernikahan.</p>
                 </div></motion.div>
             </div>
           </div>
@@ -545,15 +553,19 @@ export default function WeddingInvitation() {
 
             <div className='relative w-full my-1'>
               <div className='w-full flex flex-col bg-white rounded-md overflow-hidden'>
-                <div className='text-left font-serif p-2 w-full bg-[#B18B41]'>
-                  <p>Coments</p>
+                <div className='text-left font-serif p-1 w-full bg-[#B18B41]'>
+                  <p className='flex items-center'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chat-left-text" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                    <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+                  </svg><span className='mx-2'>Coments</span></p>
                 </div>
                 {ucapan.map((data, idx) => {
+                  const name = data.name.slice(0, 1);
                   return (
                     <div key={idx} className='w-full flex text-left text-black p-2 my-2'>
                       <div className='w-1/5 md:w-1/8'>
-                        <div className='w-15 h-15 rounded-full overflow-hidden'>
-                          <img src="/noval.png" className='w-full h-full bg-center object-cover' alt="" />
+                        <div className='w-15 h-15 flex items-center justify-center border-[0.5px] border-[#b18b41] rounded-full overflow-hidden'>
+                          <p>{name}</p>
                         </div>
                       </div>
                       <div className='w-full p-2'>
@@ -576,7 +588,7 @@ export default function WeddingInvitation() {
         {/* FOOTER */}
         <footer className="py-10 text-center bg-black border-t border-neutral-900">
           <p className="text-neutral-500">
-            © 2026 Satria F Design
+            © 2026 Solusi Digital Kreatif
           </p>
         </footer>
       </div>
