@@ -30,9 +30,9 @@ export const metadata = {
     description: "Undangan pernikahan Noval & Latifah. Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di hari istimewa kami.",
     images: [
       {
-        url: "/hero.jpeg",
-        width: 2773,
-        heigh: 4160
+        url: "/thumbnail.jpeg",
+        width: 630,
+        height: 1200
       }
     ]
   }

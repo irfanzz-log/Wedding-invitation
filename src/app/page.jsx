@@ -232,7 +232,7 @@ export default function WeddingInvitation() {
                 <div className='w-3/4 p-[0.2px] rounded-xl my-2 bg-black'>
                 </div>
               </div>
-              <p className='text-[#505050] font-serif'>Anak kedua dari 4 bersaudara</p>
+              <p className='text-[#505050] font-serif'>Putra dari</p>
               <p className="text-[#505050] font-serif">
                 Bapak Eko Prasetyo dan Ibu Sri Hartini
               </p>
@@ -258,7 +258,7 @@ export default function WeddingInvitation() {
                 <div className='w-3/4 p-[0.2px] rounded-xl my-2 bg-black'>
                 </div>
               </div>
-              <p className='text-[#505050] font-serif'>Anak kedua dari 2 bersaudara</p>
+              <p className='text-[#505050] font-serif'>Putri dari</p>
               <p className="text-[#505050] font-serif">
                 Bapak Yana Rahman dan Ibu Sri Iimaliah
               </p>
@@ -412,7 +412,8 @@ export default function WeddingInvitation() {
                 className='my-5 w-full md:flex justify-center'>
                 <div className='md:w-1/4'>
                   <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Awal Bertemu</h2>
-                  <p>Kami pertama kali dipertemukan di sebuah tempat yang sederhana namun indah ruang latihan Bela diri. Di sanalah kami belajar disiplin, persaudaraan, dan kekuatan, sambil perlahan saling mengenal. Dari latihan yang awalnya hanya untuk mengasah ilmu, tumbuhlah rasa yang tidak kami duga. Kini, perjalanan itu membawa kami pada keputusan untuk menyatukan langkah dan membangun masa depan bersama.</p>
+                  <p>Pada tahun 2021, kami dipertemukan di sebuah tempat sederhana yang menjadi awal dari semua cerita. Dari ruang latihan itulah kami belajar banyak hal—disiplin, kebersamaan, dan perlahan saling mengenal hingga tumbuh rasa yang tidak kami duga.
+                    Hingga akhirnya, pada 1 Mei 2022, kami resmi berjalan bersama sebagai sepasang kekasih. Sejak saat itu, langkah kami terus sejalan, menguatkan satu sama lain hingga tiba pada keputusan untuk membangun masa depan bersama.</p>
                   <div className='overflow-hidden'><img src="/first-meet.jpeg" alt="" className='my-10 transition-all duration-1000 ease-out hover:scale-110 rounded-lg' /></div>
                 </div>
               </motion.div>
@@ -438,7 +439,7 @@ export default function WeddingInvitation() {
                 className='my-5 w-full md:flex justify-center'>
                 <div className='md:w-1/4'>
                   <h2 className='font-jawa text-[#B18B41] font-bold text-3xl'>Menikah</h2>
-                  <p>Dan kini, cinta itu akhirnya berlabuh pada hari yang kami tunggu-tunggu, jatuh pada tanggal 6 Juni 2026 (06-06-2026), sebagai momen suci kami mengikat janji pernikahan.</p>
+                  <p>Dan kini, cinta itu akhirnya berlabuh pada hari yang kami tunggu-tunggu, jatuh pada tanggal 6 Juni 2026 (06–06–2026), sebagai momen suci kami mengikat janji pernikahan.</p>
                 </div></motion.div>
             </div>
           </div>
