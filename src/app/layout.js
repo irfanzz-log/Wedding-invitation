@@ -19,25 +19,46 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://wedding.solusidigitalkreatif.my.id"),
+
   title: "Noval & Latifah Wedding Invitation",
-  description: "Undangan pernikahan Noval & Latifah. Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di hari istimewa kami.",
-  icons: {
-    icon: '/favicon.ico'
-  },
+
+  description:
+    "Undangan pernikahan Noval & Latifah. Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di hari istimewa kami.",
 
   openGraph: {
-    title: "Noval & Latifah Wedding Innovation",
-    description: "Undangan pernikahan Noval & Latifah. Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di hari istimewa kami.",
+    title: "Noval & Latifah Wedding Invitation",
+
+    description:
+      "Undangan pernikahan Noval & Latifah. Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di hari istimewa kami.",
+
+    url: "https://wedding.solusidigitalkreatif.my.id",
+
+    siteName: "Wedding Invitation",
+
     images: [
       {
-        url: "/thumbnail.jpeg",
-        width: 630,
-        height: 1200
-      }
-    ]
-  }
-};
+        url: "https://wedding.solusidigitalkreatif.my.id/thumbnail.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Noval & Latifah Wedding",
+      },
+    ],
 
+    locale: "id_ID",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Noval & Latifah Wedding Invitation",
+    description:
+      "Undangan pernikahan Noval & Latifah.",
+    images: [
+      "https://wedding.solusidigitalkreatif.my.id/thumbnail.jpg",
+    ],
+  },
+};
 export default function RootLayout({ children }) {
   return (
     <html
